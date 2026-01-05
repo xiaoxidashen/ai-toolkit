@@ -18,7 +18,7 @@ const DatasetImageCard: React.FC<DatasetImageCardProps> = ({
   alt,
   children,
   className = '',
-  onDelete = () => {},
+  onDelete = () => { },
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -37,7 +37,7 @@ const DatasetImageCard: React.FC<DatasetImageCardProps> = ({
       .then(res => res.data)
       .then(data => {
         console.log('Caption fetched:', data);
-        if (data){
+        if (data) {
           // fix issue where caption could be non string
           data = `${data}`
         }
@@ -149,9 +149,8 @@ const DatasetImageCard: React.FC<DatasetImageCardProps> = ({
                   src={`/api/img/${encodeURIComponent(imageUrl)}`}
                   alt={alt}
                   onLoad={handleLoad}
-                  className={`w-full h-full object-contain transition-opacity duration-300 ${
-                    loaded ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className={`w-full h-full object-contain transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'
+                    }`}
                 />
               )}
             </>
@@ -167,10 +166,10 @@ const DatasetImageCard: React.FC<DatasetImageCardProps> = ({
               className="bg-gray-800 rounded-full p-2"
               onClick={() => {
                 openConfirm({
-                  title: `Delete ${isItAVideo ? 'video' : 'image'}`,
-                  message: `Are you sure you want to delete this ${isItAVideo ? 'video' : 'image'}? This action cannot be undone.`,
+                  title: `删除${isItAVideo ? '视频' : '图片'}`,
+                  message: `你确信要删除这个${isItAVideo ? '视频' : '图片'}吗？这个操作无法撤销。`,
                   type: 'warning',
-                  confirmText: 'Delete',
+                  confirmText: '删除',
                   onConfirm: () => {
                     apiClient
                       .post('/api/img/delete', { imgPath: imageUrl })
@@ -220,11 +219,11 @@ const DatasetImageCard: React.FC<DatasetImageCardProps> = ({
         )}
         {(!inViewport || !isVisible) && isCaptionLoaded && (
           <div className="w-full h-full flex items-center justify-center text-gray-400">
-            {isVisible ? 'Scroll into view to edit caption' : 'Show content to edit caption'}
+            {isVisible ? '滚动到视图中以编辑标题' : '显示内容以编辑标题'}
           </div>
         )}
         {!isCaptionLoaded && (
-          <div className="w-full h-full flex items-center justify-center text-gray-400">Loading caption...</div>
+          <div className="w-full h-full flex items-center justify-center text-gray-400">加载标题中...</div>
         )}
       </div>
     </div>

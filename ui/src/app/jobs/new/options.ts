@@ -234,7 +234,7 @@ export const modelArchs: ModelArch[] = [
     additionalSections: ['datasets.num_frames', 'model.low_vram', 'model.multistage', 'model.layer_offloading'],
     accuracyRecoveryAdapters: {
       // '3 bit with ARA': 'uint3|ostris/accuracy_recovery_adapters/wan22_14b_t2i_torchao_uint3.safetensors',
-      '4 bit with ARA': 'uint4|ostris/accuracy_recovery_adapters/wan22_14b_t2i_torchao_uint4.safetensors',
+      '4位 + ARA': 'uint4|ostris/accuracy_recovery_adapters/wan22_14b_t2i_torchao_uint4.safetensors',
     },
   },
   {
@@ -270,7 +270,7 @@ export const modelArchs: ModelArch[] = [
       'model.layer_offloading',
     ],
     accuracyRecoveryAdapters: {
-      '4 bit with ARA': 'uint4|ostris/accuracy_recovery_adapters/wan22_14b_i2v_torchao_uint4.safetensors',
+      '4位 + ARA': 'uint4|ostris/accuracy_recovery_adapters/wan22_14b_i2v_torchao_uint4.safetensors',
     },
   },
   {
@@ -328,7 +328,7 @@ export const modelArchs: ModelArch[] = [
     disableSections: ['network.conv'],
     additionalSections: ['model.low_vram', 'model.layer_offloading'],
     accuracyRecoveryAdapters: {
-      '3 bit with ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_torchao_uint3.safetensors',
+      '3位 + ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_torchao_uint3.safetensors',
     },
   },
   {
@@ -350,8 +350,8 @@ export const modelArchs: ModelArch[] = [
     additionalSections: ['model.low_vram', 'model.layer_offloading'],
     // Training an ARA now, the other one will not work
     accuracyRecoveryAdapters: {
-      '3 bit with ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_2512_torchao_uint3.safetensors',
-      '4 bit with ARA': 'uint4|ostris/accuracy_recovery_adapters/qwen_image_2512_torchao_uint4.safetensors',
+      '3位 + ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_2512_torchao_uint3.safetensors',
+      '4位 + ARA': 'uint4|ostris/accuracy_recovery_adapters/qwen_image_2512_torchao_uint4.safetensors',
     },
   },
   {
@@ -372,7 +372,7 @@ export const modelArchs: ModelArch[] = [
     disableSections: ['network.conv'],
     additionalSections: ['datasets.control_path', 'sample.ctrl_img', 'model.low_vram', 'model.layer_offloading'],
     accuracyRecoveryAdapters: {
-      '3 bit with ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_edit_torchao_uint3.safetensors',
+      '3位 + ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_edit_torchao_uint3.safetensors',
     },
   },
   {
@@ -406,7 +406,7 @@ export const modelArchs: ModelArch[] = [
       'model.qie.match_target_res',
     ],
     accuracyRecoveryAdapters: {
-      '3 bit with ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_edit_2509_torchao_uint3.safetensors',
+      '3位 + ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_edit_2509_torchao_uint3.safetensors',
     },
   },
   {
@@ -440,7 +440,7 @@ export const modelArchs: ModelArch[] = [
       'model.qie.match_target_res',
     ],
     accuracyRecoveryAdapters: {
-      '3 bit with ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_edit_2511_torchao_uint3.safetensors',
+      '3位 + ARA': 'uint3|ostris/accuracy_recovery_adapters/qwen_image_edit_2511_torchao_uint3.safetensors',
     },
   },
   {
@@ -461,7 +461,7 @@ export const modelArchs: ModelArch[] = [
     disableSections: ['network.conv'],
     additionalSections: ['model.low_vram'],
     accuracyRecoveryAdapters: {
-      '3 bit with ARA': 'uint3|ostris/accuracy_recovery_adapters/hidream_i1_full_torchao_uint3.safetensors',
+      '3位 + ARA': 'uint3|ostris/accuracy_recovery_adapters/hidream_i1_full_torchao_uint3.safetensors',
     },
   },
   {
@@ -711,8 +711,8 @@ export const groupedModelOptions: GroupedSelectOption[] = modelArchs.reduce((acc
 }, [] as GroupedSelectOption[]);
 
 export const quantizationOptions: SelectOption[] = [
-  { value: '', label: '- NONE -' },
-  { value: 'qfloat8', label: 'float8 (default)' },
+  { value: '', label: '- 无 -' },
+  { value: 'qfloat8', label: 'float8 (默认)' },
   { value: 'uint7', label: '7 bit' },
   { value: 'uint6', label: '6 bit' },
   { value: 'uint5', label: '5 bit' },
@@ -733,12 +733,12 @@ interface JobTypeOption extends SelectOption {
 export const jobTypeOptions: JobTypeOption[] = [
   {
     value: 'diffusion_trainer',
-    label: 'LoRA Trainer',
+    label: 'LoRA 训练器',
     disableSections: ['slider'],
   },
   {
     value: 'concept_slider',
-    label: 'Concept Slider',
+    label: '概念滑块',
     disableSections: ['trigger_word', 'train.diff_output_preservation'],
     onActivate: (config: JobConfig) => {
       // add default slider config
