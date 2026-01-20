@@ -6,10 +6,8 @@ cd /workspace/
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
 
-pip install -U huggingface_hub
-
 # 下载 LTX-2 模型的所有文件
-huggingface-cli download Lightricks/LTX-2 \
+hf download Lightricks/LTX-2 \
     "audio_vae/config.json" \
     "audio_vae/diffusion_pytorch_model.safetensors" \
     "connectors/config.json" \
@@ -48,8 +46,3 @@ huggingface-cli download Lightricks/LTX-2 \
     "vae/diffusion_pytorch_model.safetensors" \
     "vocoder/config.json" \
     "vocoder/diffusion_pytorch_model.safetensors"
-
-git clone https://github.com/xiaoxidashen/ai-toolkit.git
-cd ai-toolkit
-pip install -r requirements.txt
-
